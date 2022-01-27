@@ -29,10 +29,13 @@ public:
 
 private:
 
-	/* Behind character*/
-	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, 
-		Category = "Camera", meta = (AllowPrivateAccess = true))
+	/** Behind character*/
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Camera", meta = (AllowPrivateAccess = true))
 	class USpringArmComponent* CameraBoom;
+
+	/** Камера за игроком */
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = "Camera", meta = (AllowPrivateAccess = true))
+	class UCameraComponent* FollowCamera;
 
 public:
 
@@ -40,5 +43,8 @@ public:
 	FORCEINLINE USpringArmComponent* GetCameraBoom() const
 		{ return CameraBoom;  }
 
-
+	FORCEINLINE UCameraComponent* GetFollowCamera() const
+	{
+		return FollowCamera;
+	}
 };

@@ -3,7 +3,7 @@
 
 #include "ShooterCharacter.h"
 #include "GameFramework\SpringArmComponent.h"
-
+#include "Camera\CameraComponent.h"
 
 // Sets default values
 AShooterCharacter::AShooterCharacter()
@@ -16,9 +16,15 @@ AShooterCharacter::AShooterCharacter()
 		
 	//Create CameraBoom, притяшивается, если произойдёт коллизия
 	CameraBoom->SetupAttachment(RootComponent);
-	CameraBoom->TargetArmLength = 300.f;
+	CameraBoom->TargetArmLength = 1000.f;
 	CameraBoom->bUsePawnControlRotation = true; // Вращается
 
+	//UCameraComponent* FollowCamera
+	FollowCamera = CreateDefaultSubobject
+		<UCameraComponent>(L"FollowCamera");
+
+	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Крепим камеру на штатив
+	FollowCamera->bUsePawnControlRotation = false; // На самом штативе камера не вращается
 
 }
 
